@@ -1,354 +1,241 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Karolyne Muniz — Analista de Dados</title>
-<meta name="description" content="Portfólio de Karolyne Muniz — Analista de Dados: Power BI, Python, Machine Learning e BI aplicados à saúde e a negócios.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karolyne Muniz | Data Analyst</title>
+<meta name="description" content="Data Analyst focused on Power BI, SQL and Python. Dashboards, data analysis and applied AI.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap">
 <style>
-  :root{
-    --paper:#EDEEE7;
-    --paper-2:#E3E5DC;
-    --ink:#17211D;
-    --ink-soft:#4B564F;
-    --teal:#1F5E52;
-    --teal-dark:#12201B;
-    --ochre:#B96B1F;
-    --line: rgba(23,33,29,0.14);
+:root{
+  --bg:#0F1B2D; --bg2:#14243b; --card:#182a44; --line:#2a3f5e;
+  --text:#E8EEF6; --muted:#A9B8CC; --accent:#2DD4BF; --gold:#F5B94A;
+}
+:root[data-theme="light"]{
+  --bg:#F6F8FB; --bg2:#EAF0F7; --card:#FFFFFF; --line:#D5DFEB;
+  --text:#0F1B2D; --muted:#4A5B73; --accent:#0F766E; --gold:#B45309;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#F6F8FB; --bg2:#EAF0F7; --card:#FFFFFF; --line:#D5DFEB;
+    --text:#0F1B2D; --muted:#4A5B73; --accent:#0F766E; --gold:#B45309;
   }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Work Sans', sans-serif;
-    font-size:16px;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    margin:0;
-    letter-spacing:-0.01em;
-  }
-  a{color:inherit;}
-  .wrap{max-width:1040px;margin:0 auto;padding:0 28px;}
-  .rule{border:none;border-top:1px solid var(--line);}
-
-  /* header */
-  header{
-    position:sticky;top:0;z-index:10;
-    background:rgba(237,238,231,0.92);
-    backdrop-filter:blur(6px);
-    border-bottom:1px solid var(--line);
-  }
-  header .wrap{
-    display:flex;align-items:center;justify-content:space-between;
-    padding-top:16px;padding-bottom:16px;
-  }
-  .brand{font-family:'Fraunces', serif;font-size:1.05rem;font-weight:600;}
-  nav{display:flex;gap:26px;font-size:0.92rem;}
-  nav a{text-decoration:none;color:var(--ink-soft);border-bottom:1px solid transparent;padding-bottom:2px;}
-  nav a:hover{color:var(--ink);border-bottom-color:var(--ink);}
-
-  /* hero */
-  .hero{padding:78px 0 56px;}
-  .hero .kicker{color:var(--teal);font-family:'Fraunces', serif;font-style:italic;font-size:1.05rem;margin-bottom:14px;}
-  .hero h1{font-size:2.7rem;max-width:14ch;line-height:1.08;}
-  .hero p{max-width:52ch;color:var(--ink-soft);font-size:1.08rem;margin-top:20px;}
-  .hero .links{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap;}
-  .btn{
-    display:inline-block;padding:10px 20px;border:1px solid var(--ink);
-    text-decoration:none;font-size:0.92rem;border-radius:2px;
-    transition:background .15s ease, color .15s ease;
-  }
-  .btn.solid{background:var(--ink);color:var(--paper);}
-  .btn.solid:hover{background:var(--teal);border-color:var(--teal);}
-  .btn:not(.solid):hover{background:var(--ink);color:var(--paper);}
-
-  /* focus areas */
-  .focus{padding:44px 0;border-top:1px solid var(--line);}
-  .focus-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);}
-  .focus-cell{padding:28px;}
-  .focus-cell:first-child{border-right:1px solid var(--line);}
-  .focus-cell .dot{width:9px;height:9px;display:inline-block;border-radius:50%;margin-right:8px;}
-  .focus-cell.health .dot{background:var(--teal);}
-  .focus-cell.biz .dot{background:var(--ochre);}
-  .focus-cell h3{font-size:1.15rem;margin-bottom:10px;}
-  .focus-cell p{color:var(--ink-soft);font-size:0.95rem;margin:0;}
-
-  /* sections */
-  section{padding:56px 0;}
-  .section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:10px;}
-  .section-head h2{font-size:1.6rem;}
-  .section-head span{color:var(--ink-soft);font-size:0.9rem;}
-
-  /* skills */
-  .skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 40px;}
-  .skill-group h4{font-size:0.78rem;text-transform:none;color:var(--ink-soft);margin:0 0 8px;font-weight:600;}
-  .skill-tags{display:flex;flex-wrap:wrap;gap:8px;}
-  .tag{
-    border:1px solid var(--line);padding:5px 12px;font-size:0.85rem;
-    border-radius:2px;background:var(--paper-2);
-  }
-
-  /* projects */
-  .filters{display:flex;gap:8px;margin-bottom:26px;flex-wrap:wrap;}
-  .filter-btn{
-    border:1px solid var(--ink);background:none;padding:7px 16px;
-    font-family:'Work Sans',sans-serif;font-size:0.85rem;cursor:pointer;
-    border-radius:2px;color:var(--ink);
-  }
-  .filter-btn.active{background:var(--ink);color:var(--paper);}
-  .projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
-  .project{background:var(--paper);padding:26px;display:flex;flex-direction:column;gap:12px;}
-  .project.hidden{display:none;}
-  .project .ptop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
-  .project h3{font-size:1.15rem;}
-  .status{font-size:0.75rem;color:var(--teal);border:1px solid var(--teal);padding:2px 8px;border-radius:2px;white-space:nowrap;}
-  .status.progress{color:var(--ochre);border-color:var(--ochre);}
-  .project p{color:var(--ink-soft);font-size:0.92rem;margin:0;}
-  .project .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
-  .project .tags .tag{font-size:0.75rem;padding:3px 9px;}
-  .project a.repo{font-size:0.88rem;margin-top:auto;text-decoration:underline;text-underline-offset:3px;color:var(--ink);}
-
-  /* timeline */
-  .timeline{border-left:1px solid var(--line);margin-left:6px;}
-  .tl-item{position:relative;padding:0 0 30px 26px;}
-  .tl-item:last-child{padding-bottom:0;}
-  .tl-item::before{
-    content:"";position:absolute;left:-5px;top:4px;width:9px;height:9px;
-    border-radius:50%;background:var(--teal);
-  }
-  .tl-item .tl-date{font-size:0.82rem;color:var(--ink-soft);margin-bottom:4px;}
-  .tl-item h4{font-family:'Fraunces',serif;font-weight:500;font-size:1.05rem;margin-bottom:4px;}
-  .tl-item p{margin:0;color:var(--ink-soft);font-size:0.92rem;}
-
-  /* footer */
-  footer{background:var(--teal-dark);color:var(--paper);padding:52px 0 34px;margin-top:20px;}
-  footer h2{color:var(--paper);font-size:1.7rem;max-width:16ch;}
-  footer p{color:#B9C4BE;max-width:44ch;margin-top:14px;}
-  footer .links{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;}
-  footer .btn{border-color:var(--paper);color:var(--paper);}
-  footer .btn.solid{background:var(--paper);color:var(--teal-dark);border-color:var(--paper);}
-  footer .btn.solid:hover{background:var(--ochre);color:var(--paper);border-color:var(--ochre);}
-  footer .btn:not(.solid):hover{background:var(--paper);color:var(--teal-dark);}
-  footer .foot-note{margin-top:44px;font-size:0.8rem;color:#7F8C86;}
-
-  @media (max-width:720px){
-    nav{display:none;}
-    .hero h1{font-size:2.1rem;}
-    .focus-grid{grid-template-columns:1fr;}
-    .focus-cell:first-child{border-right:none;border-bottom:1px solid var(--line);}
-    .skills-grid{grid-template-columns:1fr;}
-    .projects-grid{grid-template-columns:1fr;}
-  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.6}
+a{color:var(--accent)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;line-height:1.15;margin:0}
+header.nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--text);text-decoration:none}
+.nav nav{display:flex;gap:18px;flex-wrap:wrap}
+.nav nav a{color:var(--muted);text-decoration:none;font-size:15px}
+.nav nav a:hover{color:var(--accent)}
+.hero{padding:88px 0 72px;background-image:radial-gradient(color-mix(in srgb,var(--muted) 22%,transparent) 1.5px,transparent 1.5px);background-size:28px 28px}
+.eyebrow{font-family:'Space Grotesk',sans-serif;font-weight:500;letter-spacing:.16em;font-size:14px;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(36px,6vw,64px);margin:14px 0 18px;max-width:14ch}
+.hero p.lead{font-size:clamp(17px,2.2vw,21px);color:var(--muted);max-width:60ch;margin:0 0 26px}
+.bar{width:96px;height:4px;background:var(--gold);margin:0 0 22px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 20px;border-radius:8px;font-weight:500;text-decoration:none;border:1px solid var(--accent)}
+.btn.primary{background:var(--accent);color:#06222a}
+.btn.ghost{color:var(--accent)}
+.btn:hover{filter:brightness(1.1)}
+section{padding:64px 0}
+section.alt{background:var(--bg2)}
+.h2{font-size:clamp(26px,3.4vw,34px);margin-bottom:8px}
+.sub{color:var(--muted);margin:0 0 30px;max-width:62ch}
+.grid{display:grid;gap:18px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px}
+.card h3{font-size:19px;margin-bottom:8px}
+.card p{margin:0 0 12px;color:var(--muted);font-size:15px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;padding:0;list-style:none}
+.tags li{font-size:13px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--text)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:26px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.stat b{display:block;font-family:'Space Grotesk',sans-serif;font-size:30px;color:var(--accent)}
+.stat span{color:var(--muted);font-size:14px}
+.now{border-left:4px solid var(--gold)}
+.timeline{list-style:none;margin:0;padding:0;display:grid;gap:18px}
+.timeline li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px}
+.timeline .when{font-size:13px;color:var(--gold);font-weight:500}
+.timeline h3{font-size:18px;margin:4px 0}
+.timeline p{margin:0;color:var(--muted);font-size:15px}
+.skills h3{font-size:16px;margin-bottom:10px;color:var(--accent)}
+footer{padding:40px 0;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+button.theme{background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:6px 10px;cursor:pointer;font:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 </style>
 </head>
 <body>
 
-<header>
+<header class="nav">
   <div class="wrap">
-    <div class="brand">Karolyne Muniz</div>
-    <nav>
-      <a href="#sobre">Sobre</a>
+    <a class="logo" href="#top">Karolyne Muniz</a>
+    <nav aria-label="Sections">
+      <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
-      <a href="#projetos">Projetos</a>
-      <a href="#formacao">Formação</a>
-      <a href="#contato">Contato</a>
+      <a href="#now">Now</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
     </nav>
+    <button class="theme" id="theme" type="button" aria-label="Toggle light and dark theme">Theme</button>
   </div>
 </header>
 
-<section class="hero">
-  <div class="wrap">
-    <div class="kicker">Analista de Dados</div>
-    <h1>Dados aplicados à saúde e aos negócios</h1>
-    <p>Construo dashboards, modelos preditivos e análises exploratórias com Power BI, Python e Machine Learning — atualmente explorando tanto o setor de saúde quanto o de negócios/varejo.</p>
-    <div class="links">
-      <a class="btn solid" href="https://github.com/karolyne-ia-muniz" target="_blank" rel="noopener">Ver no GitHub</a>
-      <a class="btn" href="#projetos">Ver projetos</a>
-    </div>
-  </div>
-</section>
-
-<section class="focus">
-  <div class="wrap">
-    <div class="focus-grid">
-      <div class="focus-cell health">
-        <h3><span class="dot"></span>Saúde</h3>
-        <p>Modelos preditivos e dashboards para apoiar triagem, alocação de recursos e detecção precoce — com foco em tornar achados clínicos legíveis para times não técnicos.</p>
-      </div>
-      <div class="focus-cell biz">
-        <h3><span class="dot"></span>Negócios &amp; Varejo</h3>
-        <p>Simuladores de risco de crédito, ferramentas de planejamento financeiro e BI orientado a decisão — aplicando os mesmos fundamentos analíticos a problemas de negócio.</p>
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Data analysis · BI · AI</div>
+      <h1>Turning data into decisions</h1>
+      <div class="bar"></div>
+      <p class="lead">I'm Karolyne, a data analyst who builds Power BI dashboards, analyzes data with SQL and Python, and applies machine learning and LLMs to real problems. B.Sc. in Computer Science and MBA in Data Science.</p>
+      <div class="btns">
+        <a class="btn primary" href="#projects">See my projects</a>
+        <a class="btn ghost" href="https://github.com/karolyne-ia-muniz">GitHub</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/YOUR-LINKEDIN">LinkedIn</a>
       </div>
     </div>
   </div>
-</section>
 
-<section id="skills">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Skills</h2>
-      <span>Ferramentas e áreas de atuação</span>
+  <section id="projects">
+    <div class="wrap">
+      <h2 class="h2">Selected projects</h2>
+      <p class="sub">Analyses and dashboards built on public datasets, with the limits of each one documented.</p>
+      <div class="grid g3">
+        <article class="card">
+          <h3>UK Online Retail Analysis</h3>
+          <p>530K+ transactions and £10.6M in revenue analyzed. RFM segmentation shows 947 "Champion" customers (21.8%) generate 64.6% of revenue. Includes cohort retention and seasonality.</p>
+          <ul class="tags"><li>Python</li><li>Pandas</li><li>RFM</li><li>Cohorts</li></ul>
+          <a href="https://github.com/karolyne-ia-muniz/uk_retail_analysis">View on GitHub →</a>
+        </article>
+        <article class="card">
+          <h3>Stroke Prediction Dashboard</h3>
+          <p>A 3-page Power BI report (overview, risk factors, model performance) built on an SVM model for about 5,100 patients, framed for hospital triage and early detection.</p>
+          <ul class="tags"><li>Power BI</li><li>Python</li><li>SVM</li></ul>
+          <a href="https://github.com/karolyne-ia-muniz/stroke_prediction">View on GitHub →</a>
+        </article>
+        <article class="card">
+          <h3>Credit Risk Scoring & Simulator</h3>
+          <p>A credit risk model and a policy simulator to compare approval strategies, using the Lending Club dataset.</p>
+          <ul class="tags"><li>Python</li><li>Machine Learning</li></ul>
+          <a href="https://github.com/karolyne-ia-muniz/modelagem_score_credito-risco">View on GitHub →</a>
+        </article>
+        <article class="card">
+          <h3>Worldwide COVID-19 EDA</h3>
+          <p>Exploratory analysis of 221 countries and territories, published as an interactive dashboard.</p>
+          <ul class="tags"><li>Python</li><li>Streamlit</li></ul>
+          <a href="https://github.com/karolyne-ia-muniz/covid-19-eda">View on GitHub →</a>
+        </article>
+        <article class="card">
+          <h3>Type Ia Supernova Classification</h3>
+          <p>B.Sc. thesis in Computer Science: convolutional neural networks to classify Type Ia supernovae.</p>
+          <ul class="tags"><li>Python</li><li>CNN</li><li>Deep Learning</li></ul>
+          <a href="https://ri.unir.br/items/4c97d20b-c15b-4087-9ae1-89e48bf1d3a6">Read the thesis →</a>
+        </article>
+        <article class="card">
+          <h3>PlanejaAI</h3>
+          <p>A budget simulator built with React and Gemini during a DIO bootcamp.</p>
+          <ul class="tags"><li>React</li><li>Gemini</li><li>LLMs</li></ul>
+          <a href="https://github.com/karolyne-ia-muniz/planejaai">View on GitHub →</a>
+        </article>
+      </div>
+      <div class="stats" aria-label="UK retail analysis highlights">
+        <div class="stat"><b>530K</b><span>transactions analyzed</span></div>
+        <div class="stat"><b>£10.6M</b><span>revenue in the dataset</span></div>
+        <div class="stat"><b>64.6%</b><span>of revenue from 21.8% of customers</span></div>
+        <div class="stat"><b>21.5%</b><span>month-1 customer retention</span></div>
+      </div>
     </div>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <h4>Linguagens</h4>
-        <div class="skill-tags">
-          <span class="tag">Python</span><span class="tag">R</span><span class="tag">SQL</span>
+  </section>
+
+  <section id="skills" class="alt">
+    <div class="wrap skills">
+      <h2 class="h2">Skills</h2>
+      <p class="sub">The tools I use most to go from raw data to a clear answer.</p>
+      <div class="grid g2">
+        <div class="card">
+          <h3>BI & visualization</h3>
+          <ul class="tags"><li>Power BI</li><li>DAX</li><li>Power Query</li><li>Data modeling</li><li>Streamlit</li><li>Matplotlib</li></ul>
+        </div>
+        <div class="card">
+          <h3>Data & querying</h3>
+          <ul class="tags"><li>SQL</li><li>ETL</li><li>Pandas</li><li>NumPy</li><li>Data cleaning</li></ul>
+        </div>
+        <div class="card">
+          <h3>Programming</h3>
+          <ul class="tags"><li>Python</li><li>Git & GitHub</li><li>Jupyter</li></ul>
+        </div>
+        <div class="card">
+          <h3>AI & machine learning</h3>
+          <ul class="tags"><li>Machine Learning</li><li>NLP</li><li>LLMs</li><li>CNNs</li><li>Chatbots</li></ul>
         </div>
       </div>
-      <div class="skill-group">
-        <h4>BI &amp; Visualização</h4>
-        <div class="skill-tags">
-          <span class="tag">Power BI</span><span class="tag">Streamlit</span><span class="tag">Dashboards</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <h4>Machine Learning &amp; IA</h4>
-        <div class="skill-tags">
-          <span class="tag">Machine Learning</span><span class="tag">NLP</span><span class="tag">LLMs</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <h4>Dados</h4>
-        <div class="skill-tags">
-          <span class="tag">ETL</span><span class="tag">Modelagem de dados</span><span class="tag">Análise exploratória</span>
-        </div>
+    </div>
+  </section>
+
+  <section id="now">
+    <div class="wrap">
+      <h2 class="h2">What I'm doing now</h2>
+      <div class="card now">
+        <h3>Techfleet Shipathon</h3>
+        <p>A 3-week hackathon to build and launch a real product. Our theme is <strong>AI Literacy</strong>. We work in Agile, so roles are fluid, and I'm wearing the Business Analyst, Developer and Solutions Architect hats while we research and start the MVP.</p>
+        <ul class="tags"><li>Agile</li><li>AI Literacy</li><li>MVP</li><li>Business analysis</li></ul>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="projetos">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Projetos</h2>
-      <span>github.com/karolyne-ia-muniz</span>
+  <section id="experience" class="alt">
+    <div class="wrap">
+      <h2 class="h2">Experience & education</h2>
+      <p class="sub">&nbsp;</p>
+      <ul class="timeline">
+        <li><div class="when">Feb 2026 – present</div><h3>Freelance Data Analyst / Data Scientist</h3><p>Power BI dashboards, data pipelines, AI models and chatbots for clients.</p></li>
+        <li><div class="when">Ongoing</div><h3>Data Annotation for AI, Innodata (Corkboard Annotation Team)</h3><p>Annotating and reviewing datasets used to train AI models.</p></li>
+        <li><div class="when">Oct 2025 – Dec 2025</div><h3>Junior Data Analyst, Brasil Digital Telecom</h3><p>Data analysis and reporting for a telecommunications team.</p></li>
+        <li><div class="when">Apr 2024 – Jul 2025</div><h3>IT Support Intern, Ministério Público Federal</h3><p>Technical support in a public institution.</p></li>
+        <li><div class="when">Oct 2025 – Mar 2026</div><h3>MBA in Data Science, Anhanguera Educacional</h3><p>&nbsp;</p></li>
+        <li><div class="when">Completed 2025</div><h3>B.Sc. in Computer Science, Universidade Federal de Rondônia</h3><p>&nbsp;</p></li>
+      </ul>
     </div>
+  </section>
 
-    <div class="filters">
-      <button class="filter-btn active" data-filter="all">Todos</button>
-      <button class="filter-btn" data-filter="saude">Saúde</button>
-      <button class="filter-btn" data-filter="negocios">Negócios</button>
-      <button class="filter-btn" data-filter="ml">ML / Python</button>
-    </div>
-
-    <div class="projects-grid">
-
-      <div class="project" data-tags="saude ml">
-        <div class="ptop"><h3>Previsão de AVC</h3><span class="status">Concluído</span></div>
-        <p>Dashboard em Power BI construído a partir de EDA e um modelo SVM de previsão de risco de AVC (dataset Kaggle, ~5.110 pacientes). Achado central: taxa de AVC mais alta em mulheres, ligada à maior expectativa de vida. Enquadrado como apoio à triagem e à alocação de recursos hospitalares.</p>
-        <div class="tags"><span class="tag">Power BI</span><span class="tag">Python</span><span class="tag">SVM</span></div>
-        <a class="repo" href="https://github.com/karolyne-ia-muniz/stroke_prediction" target="_blank" rel="noopener">Ver repositório →</a>
-      </div>
-
-      <div class="project" data-tags="saude">
-        <div class="ptop"><h3>COVID-19 Global Dashboard</h3><span class="status">Concluído</span></div>
-        <p>Análise exploratória de dados de COVID-19 em 221 países e territórios, com dashboard interativo em Streamlit respondendo a perguntas como quais países tiveram os maiores níveis de casos, mortes e testes por milhão de habitantes.</p>
-        <div class="tags"><span class="tag">Python</span><span class="tag">Streamlit</span><span class="tag">EDA</span></div>
-        <a class="repo" href="https://github.com/karolyne-ia-muniz/covid-19-eda" target="_blank" rel="noopener">Ver repositório →</a>
-      </div>
-
-      <div class="project" data-tags="negocios ml">
-        <div class="ptop"><h3>Modelagem de Score de Crédito</h3><span class="status">Concluído</span></div>
-        <p>Simulador de políticas de crédito usando o dataset Lending Club (Kaggle), aplicando Machine Learning para apoiar decisões de concessão de crédito e testar diferentes cenários de risco.</p>
-        <div class="tags"><span class="tag">Python</span><span class="tag">Machine Learning</span></div>
-        <a class="repo" href="https://github.com/karolyne-ia-muniz/modelagem_score_credito-risco" target="_blank" rel="noopener">Ver repositório →</a>
-      </div>
-
-      <div class="project" data-tags="negocios">
-        <div class="ptop"><h3>PlanejaAI</h3><span class="status">Concluído</span></div>
-        <p>Simulador de orçamento para planejamento de metas financeiras (ex: uma viagem), que usa a API do Gemini para gerar dicas financeiras personalizadas a partir de renda, custos fixos e prazo desejado. Projeto final de um bootcamp de front-end com IA generativa.</p>
-        <div class="tags"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Gemini API</span></div>
-        <a class="repo" href="https://github.com/karolyne-ia-muniz/planejaai" target="_blank" rel="noopener">Ver repositório →</a>
-      </div>
-
-      <div class="project" data-tags="ml">
-        <div class="ptop"><h3>Álgebra Linear Aplicada a Xadrez</h3><span class="status">Concluído</span></div>
-        <p>Exploração de conceitos de álgebra linear aplicados a movimentos e posições de xadrez, implementada em Python.</p>
-        <div class="tags"><span class="tag">Python</span><span class="tag">Álgebra Linear</span></div>
-        <a class="repo" href="https://github.com/karolyne-ia-muniz" target="_blank" rel="noopener">Ver no GitHub →</a>
-      </div>
-
-      <div class="project" data-tags="saude">
-        <div class="ptop"><h3>Análise DATASUS</h3><span class="status progress">Em andamento</span></div>
-        <p>Análise de dados públicos do DATASUS, ainda em desenvolvimento — repositório será linkado assim que estiver pronto.</p>
-        <div class="tags"><span class="tag">Python</span><span class="tag">Dados públicos de saúde</span></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section id="formacao">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Formação</h2>
-      <span>Acadêmica e complementar</span>
-    </div>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-date">Out 2025 – Mar 2026</div>
-        <h4>MBA em Ciência de Dados — Anhanguera Educacional</h4>
-        <p>Pós-graduação concluída.</p>
-      </div>
-      <div class="tl-item">
-        <div class="tl-date">Concluído em 2025</div>
-        <h4>Bacharelado em Ciência da Computação — Universidade Federal de Rondônia</h4>
-        <p></p>
-      </div>
-      <div class="tl-item">
-        <div class="tl-date">Em andamento</div>
-        <h4>Microsoft Power BI para Business Intelligence e Data Science — Data Science Academy</h4>
-        <p>Curso gratuito (72h) integrando Power BI com R e Python para modelagem preditiva.</p>
-      </div>
-      <div class="tl-item">
-        <div class="tl-date">Complementar</div>
-        <h4>Cursos de BI — Udemy</h4>
-        <p>Formação prática adicional em Business Intelligence.</p>
+  <section id="contact">
+    <div class="wrap">
+      <h2 class="h2">Let's talk</h2>
+      <p class="sub">I'm looking for Junior Data Analyst and BI Analyst roles, remote or hybrid. Languages: Portuguese (native), English (fluent), Japanese (intermediate), Spanish (basic).</p>
+      <div class="btns">
+        <a class="btn primary" href="https://www.linkedin.com/in/YOUR-LINKEDIN">LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/karolyne-ia-muniz">GitHub</a>
+        <a class="btn ghost" href="mailto:YOUR-EMAIL">Email</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</main>
 
-<footer id="contato">
-  <div class="wrap">
-    <h2>Vamos conversar</h2>
-    <p>Aberta a oportunidades em análise e ciência de dados — tanto no setor de saúde quanto em negócios e varejo.</p>
-    <div class="links">
-      <a class="btn solid" href="https://github.com/karolyne-ia-muniz" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="#" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
-    <div class="foot-note">Karolyne Muniz — Analista de Dados</div>
-  </div>
+<footer>
+  <div class="wrap">© <span id="y">2026</span> Karolyne Muniz. Built with plain HTML and CSS.</div>
 </footer>
 
 <script>
-  const buttons = document.querySelectorAll('.filter-btn');
-  const projects = document.querySelectorAll('.project');
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      buttons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      projects.forEach(p => {
-        if (filter === 'all' || p.dataset.tags.includes(filter)) {
-          p.classList.remove('hidden');
-        } else {
-          p.classList.add('hidden');
-        }
-      });
-    });
+(function(){
+  var root=document.documentElement,btn=document.getElementById('theme');
+  try{var s=localStorage.getItem('theme');if(s)root.setAttribute('data-theme',s);}catch(e){}
+  btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme');
+    if(!cur){cur=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}
+    var next=cur==='dark'?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('theme',next);}catch(e){}
   });
+  document.getElementById('y').textContent=new Date().getFullYear();
+})();
 </script>
-
 </body>
 </html>
